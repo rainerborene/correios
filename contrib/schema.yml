@@ -1,0 +1,108 @@
+log_faixa_uf:
+  - ufe_sg
+  - ufe_cep_ini
+  - ufe_cep_fim
+
+log_localidade:
+  - loc_nu
+  - ufe_sg
+  - loc_no
+  - cep
+  - loc_in_sit
+  - loc_in_tipo_loc
+  - loc_nu_sub
+  - loc_no_abrev
+  - mun_nu
+
+log_var_loc:
+  - loc_nu
+  - val_nu
+  - val_tx
+
+log_faixa_localidade:
+  - loc_nu
+  - loc_cep_ini
+  - loc_cep_fim
+
+log_bairro:
+  - bai_nu
+  - ufe_sg
+  - loc_nu
+  - bai_no
+  - bai_no_abrev
+
+log_var_bai:
+  - bai_nu
+  - vdb_nu
+  - vdb_tx
+
+log_faixa_bairro:
+  - bai_nu
+  - fcb_cep_ini
+  - fcb_cep_fim
+
+log_cpc:
+  - cpc_nu
+  - ufe_sg
+  - loc_nu
+  - cpc_no
+  - cpc_endereco
+  - cep
+
+log_faixa_cpc:
+  - cpc_nu
+  - cpc_inicial
+  - cpc_final
+
+log_logradouro:
+  - log_nu
+  - ufe_sg
+  - loc_nu
+  - bai_nu_ini
+  - bai_nu_fim
+  - log_no
+  - log_complemento
+  - cep
+  - tlo_tx
+  - log_sta_tlo
+  - log_no_abrev
+
+log_var_log:
+  - log_nu
+  - vlo_nu
+  - tlo_tx
+  - vlo_tx
+
+log_num_sec:
+  - log_nu
+  - sec_nu_ini
+  - sec_nu_fim
+  - sec_in_lado
+
+log_grande_usuario:
+  - gru_nu
+  - ufe_sg
+  - loc_nu
+  - bai_nu
+  - log_nu
+  - gru_no
+  - gru_endereco
+  - cep
+  - gru_no_abrev
+
+log_unid_oper:
+  - uop_nu
+  - ufe_sg
+  - loc_nu
+  - bai_nu
+  - log_nu
+  - uop_no
+  - uop_endereco
+  - cep
+  - uop_in_cp
+  - uop_no_abrev
+
+log_faixa_uop:
+  - uop_nu
+  - fnc_inicial
+  - fnc_final

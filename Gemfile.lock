@@ -1,0 +1,14 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    redis (3.0.6)
+    sequel (4.9.0)
+    sqlite3 (1.3.9)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  redis
+  sequel
+  sqlite3
