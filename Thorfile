@@ -1,13 +1,13 @@
 require 'bundler/setup'
 require 'sqlite3'
 require 'sequel'
-require 'csv'
 require 'redis'
 require 'json'
+require 'csv'
 
 REDIS = Redis.new
 SCHEMA = YAML.load_file('contrib/schema.yml')
-STATES = Dir["eDNE_Basico_1304/Delimitado/LOG_LOGRADOURO_*"]
+STATES = Dir["eDNE/Delimitado/LOG_LOGRADOURO_*"]
 DB = Sequel.connect('sqlite://contrib/correios.sqlite3')
 
 class Correios < Thor
@@ -18,7 +18,7 @@ class Correios < Thor
 
   desc :prepare, 'Fix illegal quoting (run this before seeding)'
   def prepare
-    `env LANG=c sed -E -n -i '' -e 's#[|]##g' eDNE_Basico_1304/Delimitado/*.TXT`
+    `env LANG=c sed -E -n -i '' -e 's#[|]##g' eDNE/Delimitado/*.TXT`
   end
 
   desc :seed, 'Seed postal code data into MySQL database'
@@ -41,7 +41,7 @@ class Correios < Thor
           log_bairro
       WHERE log_logradouro.loc_nu = log_localidade.loc_nu
         AND log_logradouro.bai_nu_ini = log_bairro.bai_nu
-        AND log_logradouro.log_sta_tlo = "S"
+        AND log_logradouro.log_sta_tlo = "S";
     SQL
 
     cache_rows <<-SQL
@@ -57,7 +57,7 @@ class Correios < Thor
           log_bairro
       WHERE log_logradouro.loc_nu = log_localidade.loc_nu
         AND log_logradouro.bai_nu_ini = log_bairro.bai_nu
-        AND log_logradouro.log_sta_tlo = "N"
+        AND log_logradouro.log_sta_tlo = "N";
     SQL
 
     cache_rows <<-SQL
@@ -69,7 +69,7 @@ class Correios < Thor
             "" AS log_complemento,
             "" AS nome
       FROM log_localidade
-      WHERE log_localidade.cep IS NOT NULL
+      WHERE log_localidade.cep IS NOT NULL;
     SQL
 
     cache_rows <<-SQL
@@ -82,7 +82,7 @@ class Correios < Thor
             cpc_no AS nome
       FROM log_cpc,
           log_localidade
-      WHERE log_cpc.loc_nu = log_localidade.loc_nu
+      WHERE log_cpc.loc_nu = log_localidade.loc_nu;
     SQL
 
     cache_rows <<-SQL
@@ -97,7 +97,7 @@ class Correios < Thor
           log_localidade,
           log_bairro
       WHERE log_grande_usuario.loc_nu = log_localidade.loc_nu
-        AND log_grande_usuario.bai_nu = log_bairro.bai_nu
+        AND log_grande_usuario.bai_nu = log_bairro.bai_nu;
     SQL
 
     cache_rows <<-SQL
@@ -112,14 +112,14 @@ class Correios < Thor
           log_localidade,
           log_bairro
       WHERE log_unid_oper.loc_nu = log_localidade.loc_nu
-        AND log_unid_oper.bai_nu = log_bairro.bai_nu
+        AND log_unid_oper.bai_nu = log_bairro.bai_nu;
     SQL
   end
 
   private
 
   def each_row(table_name, &block)
-    path = "eDNE_Basico_1304/Delimitado/#{table_name}.txt"
+    path = "eDNE/Delimitado/#{table_name}.txt"
     CSV.foreach File.expand_path(path), col_sep: "@", encoding:
       "iso-8859-1:utf-8", quote_char: "|", &block
   end
